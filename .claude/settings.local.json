@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs grep -l \"User\\\\b\")",
+      "Bash(./mvnw -q -o compile)",
+      "Bash(./mvnw -q compile)"
+    ]
+  }
+}
