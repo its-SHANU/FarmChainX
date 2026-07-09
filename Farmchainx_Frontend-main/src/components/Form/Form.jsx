@@ -93,7 +93,7 @@ function Form({ addProduct }) {
         console.log(`  ${key}:`, value);
       }
 
-      const response = await fetch("http://localhost:8080/api/products", {
+      const response = await fetch(`${window.API_BASE_URL}/api/products`, {
         method: "POST",
         headers: {
           "Authorization": `Bearer ${token}`

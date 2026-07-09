@@ -130,7 +130,7 @@ function CustomerDashboard({ onLogout, user }) {
         <div className="product-image-container">
           {product.imageUrl ? (
             <img
-              src={`http://localhost:8080${product.imageUrl}`}
+              src={`${window.API_BASE_URL}${product.imageUrl}`}
               alt={product.name}
               className="product-image"
               onError={(e) => {

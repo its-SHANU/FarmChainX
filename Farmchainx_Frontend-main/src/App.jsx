@@ -59,7 +59,7 @@ function App() {
       console.log('📥 Fetching all products from backend...');
       console.log('🔑 Using token:', authToken.substring(0, 20) + '...');
 
-      const response = await fetch('http://localhost:8080/api/products', {
+      const response = await fetch(`${window.API_BASE_URL}/api/products`, {
         method: 'GET',
         headers: {
           'Authorization': `Bearer ${authToken}`,
@@ -106,7 +106,7 @@ function App() {
   const onDeleteProduct = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:8080/api/products/${id}`, {
+      const response = await fetch(`${window.API_BASE_URL}/api/products/${id}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`

@@ -1,5 +1,4 @@
-// services/api.js
-const API_BASE_URL = 'https://farmchainx-joq1.onrender.com';
+const API_BASE_URL = window.API_BASE_URL || 'https://farmchainx-joq1.onrender.com';
 
 class ApiService {
     constructor() {

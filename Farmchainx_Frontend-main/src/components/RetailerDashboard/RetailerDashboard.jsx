@@ -27,7 +27,7 @@ function RetailerDashboard({ onLogout }) {
     try {
       setIsLoading(true);
       const token = localStorage.getItem("token");
-      const response = await fetch("http://localhost:8080/api/products", {
+      const response = await fetch(`${window.API_BASE_URL}/api/products`, {
         headers: {
           "Content-Type": "application/json",
           ...(token && { Authorization: `Bearer ${token}` }),
@@ -63,7 +63,7 @@ function RetailerDashboard({ onLogout }) {
     try {
       const token = localStorage.getItem("token");
       const response = await fetch(
-        `http://localhost:8080/api/products/${productId}/ratings`,
+        `${window.API_BASE_URL}/api/products/${productId}/ratings`,
         {
           method: "POST",
           headers: {

@@ -24,7 +24,7 @@ function InventoryReport({ user, onLogout }) {
         throw new Error('No authentication token found');
       }
 
-      const response = await fetch('http://localhost:8080/api/products/my-products', {
+      const response = await fetch(`${window.API_BASE_URL}/api/products/my-products`, {
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
@@ -293,7 +293,7 @@ function InventoryReport({ user, onLogout }) {
                       const stockValue = (product.price || 0) * (product.quantity || 0);
                       const imageUrl = product.imageUrl?.startsWith('http') 
                         ? product.imageUrl 
-                        : `http://localhost:8080${product.imageUrl}`;
+                        : `${window.API_BASE_URL}${product.imageUrl}`;
                       
                       return (
                         <tr key={product.id}>

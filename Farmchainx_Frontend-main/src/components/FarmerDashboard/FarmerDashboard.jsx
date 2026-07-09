@@ -76,7 +76,7 @@ function FarmerDashboard({ products, onDeleteProduct, onLogout, onRefreshProduct
   const getImageUrl = (imageUrl) => {
     if (!imageUrl) return null;
     if (imageUrl.startsWith('http')) return imageUrl;
-    return `http://localhost:8080${imageUrl}`;
+    return `${window.API_BASE_URL}${imageUrl}`;
   };
 
   // Show notification
@@ -113,7 +113,7 @@ function FarmerDashboard({ products, onDeleteProduct, onLogout, onRefreshProduct
         await onRefreshProducts(token);
         showNotification('Products refreshed successfully!', 'success');
       } else {
-        const response = await fetch('http://localhost:8080/api/products', {
+        const response = await fetch(`${window.API_BASE_URL}/api/products`, {
           headers: {
             'Authorization': `Bearer ${token}`
           }

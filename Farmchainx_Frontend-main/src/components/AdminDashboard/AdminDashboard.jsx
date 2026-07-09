@@ -35,42 +35,42 @@ function AdminDashboard({ products, onDeleteProduct, onLogout }) {
         };
 
         // Fetch user statistics
-        const usersResponse = await fetch('http://localhost:8080/api/users/stats', { headers });
+        const usersResponse = await fetch(`${window.API_BASE_URL}/api/users/stats`, { headers });
         if (usersResponse.ok) {
           const userStatsData = await usersResponse.json();
           setUserStats(userStatsData);
         }
 
         // Fetch purchase analytics
-        const purchasesResponse = await fetch('http://localhost:8080/api/analytics/purchases', { headers });
+        const purchasesResponse = await fetch(`${window.API_BASE_URL}/api/analytics/purchases`, { headers });
         if (purchasesResponse.ok) {
           const purchaseData = await purchasesResponse.json();
           setPurchaseData(purchaseData);
         }
 
         // Fetch product analytics
-        const productsResponse = await fetch('http://localhost:8080/api/analytics/products', { headers });
+        const productsResponse = await fetch(`${window.API_BASE_URL}/api/analytics/products`, { headers });
         if (productsResponse.ok) {
           const productData = await productsResponse.json();
           setProductData(productData);
         }
 
         // Fetch system metrics
-        const metricsResponse = await fetch('http://localhost:8080/api/analytics/metrics', { headers });
+        const metricsResponse = await fetch(`${window.API_BASE_URL}/api/analytics/metrics`, { headers });
         if (metricsResponse.ok) {
           const metricsData = await metricsResponse.json();
           setSystemMetrics(metricsData);
         }
 
         // Fetch recent activities
-        const activitiesResponse = await fetch('http://localhost:8080/api/activities/recent', { headers });
+        const activitiesResponse = await fetch(`${window.API_BASE_URL}/api/activities/recent`, { headers });
         if (activitiesResponse.ok) {
           const activitiesData = await activitiesResponse.json();
           setRecentActivities(activitiesData);
         }
 
         // Fetch ratings and comments
-        const ratingsResponse = await fetch('http://localhost:8080/api/ratings', { headers });
+        const ratingsResponse = await fetch(`${window.API_BASE_URL}/api/ratings`, { headers });
         if (ratingsResponse.ok) {
           const ratingsData = await ratingsResponse.json();
           setRatings(ratingsData);
@@ -118,7 +118,7 @@ function AdminDashboard({ products, onDeleteProduct, onLogout }) {
         <div className="product-image-container">
           {product.imageUrl ? (
             <img 
-              src={product.imageUrl.startsWith('http') ? product.imageUrl : `http://localhost:8080${product.imageUrl}`} 
+              src={product.imageUrl.startsWith('http') ? product.imageUrl : `${window.API_BASE_URL}${product.imageUrl}`} 
               alt={product.name} 
               className="product-image"
               onError={(e) => {

@@ -275,7 +275,7 @@ export default function CartDrawer({ isOpen, onClose, user }) {
                 <div className="cart-item-thumb">
                   {item.imageUrl ? (
                     <img
-                      src={`http://localhost:8080${item.imageUrl}`}
+                      src={`${window.API_BASE_URL}${item.imageUrl}`}
                       alt={item.name}
                       onError={(e) => {
                         e.target.style.display = "none";
