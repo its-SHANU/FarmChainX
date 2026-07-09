@@ -1,14 +1,12 @@
 package com.farmchainx.farmchainx.repository;
 
 import com.farmchainx.farmchainx.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
+import org.springframework.data.mongodb.repository.MongoRepository;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, Long> {
+public interface UserRepository extends MongoRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
     // Count users by role
@@ -21,12 +19,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     long countByCreatedAtBetween(LocalDateTime start, LocalDateTime end);
 
     // Count users by role created after a specific date
-    @Query("SELECT COUNT(u) FROM User u WHERE u.role = :role AND u.createdAt > :date")
-    long countByRoleAndCreatedAtAfter(@Param("role") User.Role role, @Param("date") LocalDateTime date);
+    long countByRoleAndCreatedAtAfter(User.Role role, LocalDateTime date);
 
     // Count users by role created between two dates
-    @Query("SELECT COUNT(u) FROM User u WHERE u.role = :role AND u.createdAt BETWEEN :start AND :end")
-    long countByRoleAndCreatedAtBetween(@Param("role") User.Role role,
-                                        @Param("start") LocalDateTime start,
-                                        @Param("end") LocalDateTime end);
+    long countByRoleAndCreatedAtBetween(User.Role role, LocalDateTime start, LocalDateTime end);
 }

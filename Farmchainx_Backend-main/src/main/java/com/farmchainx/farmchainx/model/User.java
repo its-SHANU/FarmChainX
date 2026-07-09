@@ -1,35 +1,32 @@
-// User.java
 package com.farmchainx.farmchainx.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*; // Changed to jakarta.persistence
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-@Entity
+@Document(collection = "users")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    @Column(unique = true)
+    @Indexed(unique = true)
     private String email;
 
     private String password;
 
-    @Enumerated(EnumType.STRING)
     @JsonProperty("role")
     private Role role;
 
-    @Column(name = "created_at", updatable = false)
     @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
 

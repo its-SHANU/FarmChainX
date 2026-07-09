@@ -1,21 +1,20 @@
-// Product.java
 package com.farmchainx.farmchainx.model;
 
-import jakarta.persistence.*; // Changed to jakarta.persistence
 import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Entity
+@Document(collection = "products")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Table(name = "products")
 public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
@@ -29,15 +28,10 @@ public class Product {
     private Double price;
     private Integer quantity;
     private Double averageRating;
-
-    @Column(name = "image_url")
     private String imageUrl;
-
-    @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 
     // Relationships
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "farmer_id")
+    @DBRef(lazy = true)
     private User farmer;
 }

@@ -1,31 +1,27 @@
-// Purchase.java
 package com.farmchainx.farmchainx.model;
 
-import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.LocalDateTime;
 
 @Data
-@Entity
-@Table(name = "purchases")
+@Document(collection = "purchases")
 public class Purchase {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Integer quantity;
     private Double totalAmount;
-
-    @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 
     // Relationships
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id")
+    @DBRef(lazy = true)
     private Product product;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
+    @DBRef(lazy = true)
     private User user;
 
     // Constructors

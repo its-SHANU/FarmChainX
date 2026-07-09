@@ -1,16 +1,15 @@
-// Activity.java
 package com.farmchainx.farmchainx.model;
 
 import lombok.Data;
-import jakarta.persistence.*; // Changed to jakarta.persistence for Spring Boot 3.x
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import java.time.LocalDateTime;
 
 @Data
-@Entity
-@Table(name = "activities")
+@Document(collection = "activities")
 public class Activity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String type; // registration, purchase, rating, product, verification
@@ -21,8 +20,6 @@ public class Activity {
     private String amount;
     private String rating;
     private String status;
-
-    @Column(name = "created_at")
     private LocalDateTime createdAt = LocalDateTime.now();
 
     // Constructors

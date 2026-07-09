@@ -32,15 +32,12 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**", "/h2-console/**", "/uploads/**").permitAll()
+                        .requestMatchers("/api/auth/**", "/uploads/**").permitAll()
                         .requestMatchers("/api/admin/**").hasAuthority("ADMIN") // Changed from hasRole to hasAuthority
                         .requestMatchers("/api/products/my-products").hasAuthority("FARMER") // Changed from hasRole to hasAuthority
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
-        // For H2 console (if you're using it)
-        http.headers(headers -> headers.frameOptions().disable());
 
         return http.build();
     }
