@@ -1,5 +1,5 @@
 // services/api.js
-const API_BASE_URL = 'http://localhost:8080';
+const API_BASE_URL = 'https://farmchainx-joq1.onrender.com';
 
 class ApiService {
     constructor() {
@@ -8,7 +8,7 @@ class ApiService {
 
     async request(endpoint, options = {}) {
         const url = `${API_BASE_URL}${endpoint}`;
-        
+
         // Prepare headers
         const headers = {
             ...(options.body instanceof FormData ? {} : { 'Content-Type': 'application/json' }),
@@ -36,9 +36,9 @@ class ApiService {
 
         try {
             console.log(`🔄 API Call: ${config.method || 'GET'} ${url}`);
-            
+
             const response = await fetch(url, config);
-            
+
             // Handle non-JSON responses (like file downloads)
             const contentType = response.headers.get('content-type');
             if (!contentType || !contentType.includes('application/json')) {
@@ -49,7 +49,7 @@ class ApiService {
             }
 
             const data = await response.json();
-            
+
             if (!response.ok) {
                 console.error(`❌ API Error: ${response.status}`, data);
                 throw new Error(data.error || data.message || `API error: ${response.status}`);
@@ -64,11 +64,11 @@ class ApiService {
                 method: options.method,
                 error: error.message
             });
-            
+
             if (error.name === 'TypeError' && error.message.includes('Failed to fetch')) {
                 throw new Error('Cannot connect to server. Please check if the backend is running.');
             }
-            
+
             throw error;
         }
     }
@@ -76,9 +76,9 @@ class ApiService {
     // Product methods - UPDATED
     async createProduct(productData) {
         const formData = new FormData();
-        
+
         console.log('📦 Creating product with data:', productData);
-        
+
         // Append all product fields except image
         Object.keys(productData).forEach(key => {
             if (key !== 'image' && productData[key] !== undefined && productData[key] !== null) {
@@ -138,11 +138,11 @@ class ApiService {
             method: 'POST',
             body: { email, password },
         });
-        
+
         if (data.token) {
             this.setToken(data.token);
         }
-        
+
         return data;
     }
 
